@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <title>ready blame fire circle</title>
+        <style>
+span {
+    position: absolute;
+    font-size: 100%;
+}
+        </style>
+        <script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+        <script type="text/javascript" charset="utf-8" src="../js/yaros.js"></script>
+        <script>
+jQuery(function() {
+
+    var words = ['ready', 'blame', 'fire'];
+    // var seconds = 24;
+    var seconds = 60;
+
+    var y = new Yaros();
+
+    var $box = y.bigSquare(20);
+    $box.css({
+        'border': '10px solid red',
+        'background-image': "url('bg.jpg no-repeat')"
+    });
+
+    var ix1 = 0;
+    function inlay1() {
+        var word = words[ix1++ % words.length];
+        var $span = $('<span style="opacity:0.4;">' + word + '</span>');
+        y.addRandomly($box, $span);
+    }
+    var i1 = setInterval(inlay1, 20);
+    setTimeout(function() {clearInterval(i1)}, seconds * 1000);
+
+    var ix2 = 0;
+    var fs = 300;
+    var color = 'white';
+    function inlay2() {
+        var word = words[ix2++ % words.length];
+        var $span = $('<span style="color:' + color + ';font-size:' + fs + '%">' + word + '</span>');
+        y.addRandomly($box, $span);
+        fs += 5;
+    }
+    var i2 = setInterval(inlay2, 2000);
+    setTimeout(function() {
+        for (var ii = 0; ii < words.length; ii++) {
+            words[ii] = words[ii].toUpperCase();
+        }
+        fs += 100;
+        color = 'yellow';
+    }, (seconds + 1) * 1000);
+    setTimeout(function() {clearInterval(i2)}, (seconds + 7) * 1000);
+});
+        </script>
+    </head>
+    <body></body>
+</html>
